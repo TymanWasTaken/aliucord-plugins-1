@@ -1,0 +1,10 @@
+{
+    "SilentTyping": {
+        "version": "1.0.0"
+    },
+    "default": {
+        "minimumDiscordVersion": 80202,
+        "version": "1.0.0",
+        "build": "https://raw.githubusercontent.com/WinstonSepruko/aliucord-plugins/builds/%s.zip"
+    }
+}
