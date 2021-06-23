@@ -1,7 +1,6 @@
-rootProject.name = "plugins"
-
-// include ':BlockedMessageTweaks'
 include ':SilentTyping'
+
+rootProject.name = "plugins"
 
 include ':DiscordStubs'
 project(':DiscordStubs').projectDir = new File('../Aliucord/DiscordStubs')
