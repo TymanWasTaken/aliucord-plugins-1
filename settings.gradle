@@ -3,7 +3,7 @@ include ':SilentTyping'
 rootProject.name = "plugins"
 
 include ':DiscordStubs'
-project(':DiscordStubs').projectDir = new File('../Aliucord/DiscordStubs')
+project(':DiscordStubs').projectDir = new File('../repo/Aliucord/DiscordStubs')
 
 include ':Aliucord'
-project(':Aliucord').projectDir = new File('../Aliucord/Aliucord')
+project(':Aliucord').projectDir = new File('../repo/Aliucord/Aliucord')
