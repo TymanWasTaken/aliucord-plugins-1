@@ -26,18 +26,9 @@ import java.util.List;
 
 import top.canyie.pine.callback.MethodReplacement;
 
-@SuppressWarnings("ununsed")
+@SuppressWarnings("unused")
 public class SilentTyping extends Plugin {
   public static Logger logger = new Logger("SilentTyping");
-
-  private static final String className = "com.discord.stores.StoreUserTyping";
-  private static final String methodName = "setUserTyping";
-  private static final Class<?>[] methodArguments = new Class<?>[]{long.class};
-
-  private final Runnable unpatch = patcher.patch(className, methodName, methodArguments, MethodReplacement.DO_NOTHING);
-  private static final List options = Arrays.asList(
-      new ApplicationCommandOption(ApplicationCommandType.BOOLEAN, "enabled", "true OR false", null, true, false, null, null)
-  );
 
   @NonNull
   @Override
@@ -52,6 +43,15 @@ public class SilentTyping extends Plugin {
 
   @Override
   public void start(Context context) {
+    final String className = "com.discord.stores.StoreUserTyping";
+    final String methodName = "setUserTyping";
+    final Class<?>[] methodArguments = new Class<?>[]{long.class};
+
+    final Runnable unpatch = patcher.patch(className, methodName, methodArguments, MethodReplacement.DO_NOTHING);
+    final List options = Arrays.asList(
+        new ApplicationCommandOption(ApplicationCommandType.BOOLEAN, "enabled", "true OR false", null, true, false, null, null)
+    );
+
     commands.registerCommand(
         "silenttyping",
         "Toggle silent typing on or off",
