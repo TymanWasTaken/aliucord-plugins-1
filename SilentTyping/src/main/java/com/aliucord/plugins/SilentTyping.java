@@ -36,7 +36,7 @@ public class SilentTyping extends Plugin {
     var manifest = new Manifest();
     manifest.authors = new Manifest.Author[]{new Manifest.Author("winsto", 156990761366192128L)};
     manifest.description = "Hides your typing status from the Discord API, and thus other users. Toggled via a command.";
-    manifest.version = "1.1.0";
+    manifest.version = "1.1.1";
     manifest.updateUrl = "https://raw.githubusercontent.com/WinstonSepruko/aliucord-plugins/builds/updater.json";
     return manifest;
   }
