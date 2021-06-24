@@ -28,7 +28,7 @@ Building these plugins requires you do either have the source of [buildtool](htt
 │
 ├── buildtool (Aliucord/buildtool - cloned) OR buildtool (prebuilt binary)
 │
-└── config.json (modified version of the config.example.json you grabbed earlier)
+└── config.json (you'll configure this next)
 ```
 
 **2.** Configure `config.json` for `buildtool` so that it suits your working environment.
