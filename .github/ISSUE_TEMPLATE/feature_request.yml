@@ -21,7 +21,7 @@ body:
       description: Choose what plugin you are making a feature request for.
       multiple: false
       options:
-        - label: SilentTyping
+        - SilentTyping
     validations:
       required: true
   - type: textarea
