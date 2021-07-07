@@ -21,14 +21,14 @@ import com.aliucord.entities.Plugin;
 import com.discord.api.commands.ApplicationCommandType;
 import com.discord.models.commands.ApplicationCommandOption;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import top.canyie.pine.callback.MethodReplacement;
 
 @SuppressWarnings("unused")
 public class SilentTyping extends Plugin {
-  public static Logger logger = new Logger("SilentTyping");
+  Logger logger = new Logger("SilentTyping");
 
   @NonNull
   @Override
@@ -36,7 +36,7 @@ public class SilentTyping extends Plugin {
     var manifest = new Manifest();
     manifest.authors = new Manifest.Author[]{new Manifest.Author("winsto", 156990761366192128L)};
     manifest.description = "Hides your typing status from the Discord API, and thus other users. Toggled via a command.";
-    manifest.version = "1.1.1";
+    manifest.version = "1.1.2";
     manifest.updateUrl = "https://raw.githubusercontent.com/WinstonSepruko/aliucord-plugins/builds/updater.json";
     return manifest;
   }
@@ -48,7 +48,7 @@ public class SilentTyping extends Plugin {
     final Class<?>[] methodArguments = new Class<?>[]{long.class};
 
     final Runnable unpatch = patcher.patch(className, methodName, methodArguments, MethodReplacement.DO_NOTHING);
-    final List options = Arrays.asList(
+    final List<ApplicationCommandOption> options = Collections.singletonList(
         new ApplicationCommandOption(ApplicationCommandType.BOOLEAN, "enabled", "true OR false", null, true, false, null, null)
     );
 
@@ -56,10 +56,11 @@ public class SilentTyping extends Plugin {
         "silenttyping",
         "Toggle silent typing on or off",
         options,
-        args -> {
-          Boolean enabled = (Boolean)args.get("enabled");
+        ctx -> {
+          Boolean enabled = (Boolean) ctx.get("enabled");
 
-          sets.setBool("enabled", enabled);
+          //noinspection ConstantConditions
+          settings.setBool("enabled", enabled);
 
           if (enabled) {
             patcher.patch(className, methodName, methodArguments, MethodReplacement.DO_NOTHING);
@@ -72,7 +73,7 @@ public class SilentTyping extends Plugin {
         }
     );
 
-    if (!sets.getBool("enabled", false)) unpatch.run();
+    if (!settings.getBool("enabled", false)) unpatch.run();
   }
 
   @Override
