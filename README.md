@@ -1,4 +1,4 @@
-# Winston's Aliucord Plugins
+# Nat's Aliucord Plugins
 
 My repository for [Aliucord](https://github.com/Aliucord) plugins.
 

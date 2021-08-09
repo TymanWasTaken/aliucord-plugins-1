@@ -5,6 +5,6 @@
     "default": {
         "minimumDiscordVersion": 83210,
         "version": "1.0.0",
-        "build": "https://raw.githubusercontent.com/WinstonSepruko/aliucord-plugins/builds/%s.zip"
+        "build": "https://raw.githubusercontent.com/NatSepruko/aliucord-plugins/builds/%s.zip"
     }
 }

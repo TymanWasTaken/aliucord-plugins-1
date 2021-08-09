@@ -1,6 +1,6 @@
 /*
- * Winston's Aliucord Plugins
- * Copyright (C) 2021 WinstonSepruko
+ * Nat's Aliucord Plugins
+ * Copyright (C) 2021 NatSepruko
  *
  * Licensed under the GNU Lesser General Public License, Version 3 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,10 +34,10 @@ public class SilentTyping extends Plugin {
   @Override
   public Manifest getManifest() {
     var manifest = new Manifest();
-    manifest.authors = new Manifest.Author[]{new Manifest.Author("winsto", 156990761366192128L)};
+    manifest.authors = new Manifest.Author[]{new Manifest.Author("Nat Sepruko", 156990761366192128L)};
     manifest.description = "Hides your typing status from the Discord API, and thus other users. Toggled via a command.";
     manifest.version = "1.1.2";
-    manifest.updateUrl = "https://raw.githubusercontent.com/WinstonSepruko/aliucord-plugins/builds/updater.json";
+    manifest.updateUrl = "https://raw.githubusercontent.com/NatSepruko/aliucord-plugins/builds/updater.json";
     return manifest;
   }
 
