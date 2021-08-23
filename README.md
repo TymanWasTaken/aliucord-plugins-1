@@ -2,15 +2,17 @@
 
 My repository for [Aliucord](https://github.com/Aliucord) plugins.
 
-# List of Plugins
+## List of Plugins
 
 Feel free to browse this list to see a list of my plugins and what they do.
 
-## SilentTyping
+### SilentTyping
 
 Hides your typing status from the Discord API, and thus other users. Toggled via a command.
 
-# Build instructions
+### WebhookTag
+
+## Build instructions
 
 Building these plugins requires you do either have the source of [buildtool](https://github.com/Aliucord/buildtool) or the [prebuilt binary](https://github.com/Aliucord/buildtool/releases/latest) as well as a `config.json` in the same folder.
 

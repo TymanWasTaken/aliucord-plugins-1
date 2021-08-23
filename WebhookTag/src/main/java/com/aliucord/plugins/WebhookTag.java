@@ -24,7 +24,7 @@ public class WebhookTag extends Plugin {
     var manifest = new Manifest();
     manifest.authors = new Manifest.Author[] {new Manifest.Author("Nat Sepruko", 156990761366192128L) };
     manifest.description = "Sets the text of the Bot tag on webhooks to \"WEBHOOK\"";
-    manifest.version = "1.0.0";
+    manifest.version = "1.0.1";
     manifest.updateUrl = "https://raw.githubusercontent.com/NatSepruko/aliucord-plugins/builds/updater.json";
     return manifest;
   }
@@ -51,6 +51,6 @@ public class WebhookTag extends Plugin {
 
   @Override
   public void stop(Context context) {
-
+    patcher.unpatchAll();
   }
 }
