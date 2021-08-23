@@ -1,10 +1,12 @@
 {
+    "WebhookTag": {
+        "version": "1.0.0"
+    },
     "SilentTyping": {
         "version": "1.1.2"
     },
     "default": {
-        "minimumDiscordVersion": 83210,
-        "version": "1.0.0",
+        "minimumDiscordVersion": 88202,
         "build": "https://raw.githubusercontent.com/NatSepruko/aliucord-plugins/builds/%s.zip"
     }
 }
