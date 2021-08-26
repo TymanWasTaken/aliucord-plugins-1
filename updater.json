@@ -1,9 +1,9 @@
 {
     "WebhookTag": {
-        "version": "1.0.1"
+        "version": "1.1.0"
     },
     "SilentTyping": {
-        "version": "1.1.2"
+        "version": "1.2.0"
     },
     "default": {
         "minimumDiscordVersion": 88202,
