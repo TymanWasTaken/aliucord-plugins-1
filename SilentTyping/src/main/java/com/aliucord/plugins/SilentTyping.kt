@@ -18,7 +18,7 @@ class SilentTyping : Plugin() {
         Manifest().apply {
             authors = arrayOf(Author("Nat Sepruko", 156990761366192128L))
             description = "Hides your typing status from the Discord API, and thus other users. Toggled via a command."
-            version = "v1.2.0"
+            version = "1.2.0"
             updateUrl = "https://raw.githubusercontent.com/NatSepruko/aliucord-plugins/builds/updater.json"
             changelog =
                 """
