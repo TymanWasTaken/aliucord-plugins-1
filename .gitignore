@@ -13,7 +13,3 @@ local.properties
 # Unfinished scripts
 /scripts/*
 !/scripts/build.sh
-
-# Unfinished plugins
-/MessageTweaks
-/CustomEmojis
