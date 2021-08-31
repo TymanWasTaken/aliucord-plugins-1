@@ -5,7 +5,11 @@
     "SilentTyping": {
         "version": "1.2.0"
     },
+    "NicknameCommand": {
+        "version": "1.0.0"
+    },
     "default": {
+        "version": "1.0.0",
         "minimumDiscordVersion": 88202,
         "build": "https://raw.githubusercontent.com/NatSepruko/aliucord-plugins/builds/%s.zip"
     }
