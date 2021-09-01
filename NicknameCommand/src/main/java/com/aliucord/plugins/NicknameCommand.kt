@@ -18,7 +18,7 @@ class NicknameCommand : Plugin() {
         Manifest().apply {
             authors = arrayOf(Author("Nat Sepruko", 156990761366192128L))
             description = "Gives you the very awesome nick command that Android is missing, for whatever reason."
-            version = "1.0.0"
+            version = "1.1.0"
             updateUrl = "https://raw.githubusercontent.com/NatSepruko/aliucord-plugins/builds/updater.json"
         }
     
@@ -42,32 +42,43 @@ class NicknameCommand : Plugin() {
             opt,
         ) { ctx: CommandContext ->
             val nick = ctx.getString("new_nick")
-            var content = "Your nickname on this server has been changed to **$nick**."
+            val content: String
             
             if (!ctx.channel.isGuild()) {
                 content = "This is not a server!"
                 return@registerCommand CommandsAPI.CommandResult(content, null, false)
             }
             
-            val observable = RestAPI.getApi().changeGuildNickname(ctx.channel.guildId, RestAPIParams.Nick(nick))
-            
-            observable.subscribe(object: Subscriber<Void>() {
-                override fun onCompleted() {
-                    if (nick == null) content = "Your nickname on this server has been reset."
-                }
-    
-                override fun onError(e: Throwable) {
-                    content = "Failed (re)setting nickname with error: $e"
-                }
-    
-                override fun onNext(p0: Void?) {
-                    return
-                }
-            })
+            content = setNickname(ctx, nick)
             
             return@registerCommand CommandsAPI.CommandResult(content, null, false)
         }
     }
     
     override fun stop(context: Context?) = commands.unregisterAll()
+}
+
+fun setNickname(ctx: CommandContext, nickname: String?) : String {
+    var nick = ""
+    if (nickname != null) nick = nickname
+    
+    var content = "Your nickname on this server has been changed to **$nick**."
+    val observable = RestAPI.getApi().changeGuildNickname(ctx.channel.guildId, RestAPIParams.Nick(nick))
+    
+    observable.subscribe(object: Subscriber<Void>() {
+        override fun onCompleted() {
+            if (nick == "") content = "Your nickname on this server has been reset."
+        }
+        
+        override fun onError(e: Throwable) {
+            content = if (nick == "") "Failed resetting nickname with error: $e"
+            else "Failed setting nickname with error: $e"
+        }
+        
+        override fun onNext(p0: Void?) {
+            return
+        }
+    })
+    
+    return content
 }
