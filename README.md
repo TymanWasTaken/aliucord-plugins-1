@@ -12,6 +12,12 @@ Hides your typing status from the Discord API, and thus other users. Toggled via
 
 ### WebhookTag
 
+Sets the tag text on webhook messages to "WEBHOOK" instead of "BOT"
+
+### NicknameCommand
+
+Allows you to set your nickname in a server via a command. It does not yet check if you have permission to do so (coming soon™️)
+
 ## Build instructions
 
 Building these plugins requires you do either have the source of [buildtool](https://github.com/Aliucord/buildtool) or the [prebuilt binary](https://github.com/Aliucord/buildtool/releases/latest) as well as a `config.json` in the same folder.
