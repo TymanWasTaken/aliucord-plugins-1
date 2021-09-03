@@ -7,5 +7,5 @@ listOf(
     "Dashless"
 ).forEach { plugin ->
     include(":$plugin")
-    project(":$plugin").projectDir = File(plugin)
+    project(":$plugin").projectDir = File("plugins/$plugin")
 }
