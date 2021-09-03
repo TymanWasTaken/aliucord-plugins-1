@@ -16,10 +16,12 @@ import java.util.*
 class NicknameCommand : Plugin() {
     override fun getManifest() =
         Manifest().apply {
-            authors = arrayOf(Author("Nat Sepruko", 156990761366192128L))
-            description = "Gives you the very awesome nick command that Android is missing, for whatever reason."
+            authors = arrayOf(Author("Nat", 156990761366192128L))
+            description =
+                "Gives you the very awesome nick command that Android is missing, for whatever reason."
             version = "1.1.0"
-            updateUrl = "https://raw.githubusercontent.com/NatSepruko/aliucord-plugins/builds/updater.json"
+            updateUrl =
+                "https://raw.githubusercontent.com/NatSepruko/aliucord-plugins/builds/updater.json"
         }
     
     override fun start(context: Context?) {
@@ -50,7 +52,6 @@ class NicknameCommand : Plugin() {
             }
             
             content = setNickname(ctx, nick)
-            
             return@registerCommand CommandsAPI.CommandResult(content, null, false)
         }
     }
@@ -58,14 +59,15 @@ class NicknameCommand : Plugin() {
     override fun stop(context: Context?) = commands.unregisterAll()
 }
 
-fun setNickname(ctx: CommandContext, nickname: String?) : String {
+fun setNickname(ctx: CommandContext, nickname: String?): String {
     var nick = ""
     if (nickname != null) nick = nickname
     
     var content = "Your nickname on this server has been changed to **$nick**."
-    val observable = RestAPI.getApi().changeGuildNickname(ctx.channel.guildId, RestAPIParams.Nick(nick))
+    val observable =
+        RestAPI.getApi().changeGuildNickname(ctx.channel.guildId, RestAPIParams.Nick(nick))
     
-    observable.subscribe(object: Subscriber<Void>() {
+    observable.subscribe(object : Subscriber<Void>() {
         override fun onCompleted() {
             if (nick == "") content = "Your nickname on this server has been reset."
         }

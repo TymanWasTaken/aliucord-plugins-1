@@ -19,7 +19,7 @@ class WebhookTag : Plugin() {
 
     override fun getManifest() =
         Manifest().apply {
-            authors = arrayOf(Author("Nat Sepruko", 156990761366192128L))
+            authors = arrayOf(Author("Nat", 156990761366192128L))
             description = "Replaces the \"BOT\" text with \"WEBHOOK\" on webhooks."
             version = "1.1.1"
             updateUrl = "https://raw.githubusercontent.com/NatSepruko/aliucord-plugins/builds/updater.json"

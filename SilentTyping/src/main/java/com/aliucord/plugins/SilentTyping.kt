@@ -7,8 +7,8 @@ import com.aliucord.api.CommandsAPI.CommandResult
 import com.aliucord.entities.CommandContext
 import com.aliucord.entities.Plugin
 import com.aliucord.entities.Plugin.Manifest.Author
-import com.discord.models.commands.ApplicationCommandOption
 import com.discord.api.commands.ApplicationCommandType
+import com.discord.models.commands.ApplicationCommandOption
 import top.canyie.pine.callback.MethodReplacement
 
 class SilentTyping : Plugin() {
@@ -16,21 +16,24 @@ class SilentTyping : Plugin() {
     
     override fun getManifest() =
         Manifest().apply {
-            authors = arrayOf(Author("Nat Sepruko", 156990761366192128L))
-            description = "Hides your typing status from the Discord API, and thus other users. Toggled via a command."
-            version = "1.2.0"
-            updateUrl = "https://raw.githubusercontent.com/NatSepruko/aliucord-plugins/builds/updater.json"
+            authors = arrayOf(Author("Nat", 156990761366192128L))
+            description =
+                "Hides your typing status from the Discord API, and thus other users. Toggled via a command."
+            version = "1.2.1"
+            updateUrl =
+                "https://raw.githubusercontent.com/NatSepruko/aliucord-plugins/builds/updater.json"
             changelog =
                 """
                     Improved {improved marginTop}
                     ======================
                     
-                    * Migrated to Kotlin because it's better
-                    * Enabled is now the default, hopefully stopping some people from complaining that it "isn't working"
+                    * Command now doesn't set the setting if the value is the same as what is given.
+                    * Command now gives the user better feedback if they try to change the setting to the already set value.
                 """.trimIndent()
         }
     
     override fun start(context: Context?) {
+        val enabled = settings.getBool("enabled", true)
         val unpatch: Runnable = patcher.patch(
             "com.discord.stores.StoreUserTyping",
             "setUserTyping",
@@ -49,27 +52,30 @@ class SilentTyping : Plugin() {
         )
         
         commands.registerCommand(
-            "silenttyping",
+            this.name.lowercase(),
             "Toggle silent typing on or off",
             listOf(opt)
         ) { ctx: CommandContext ->
-            val enabled = ctx.getBool("enabled")
+            val arg = ctx.getBool("enabled")
             
-            if (enabled!!) {
-                patcher.patch(
-                    "com.discord.stores.StoreUserTyping",
-                    "setUserTyping",
-                    arrayOf<Class<*>>(Long::class.java),
-                    MethodReplacement.DO_NOTHING
-                ); logger.info(Utils.appActivity, "Enabled SilentTyping")
-    
-                settings.setBool("enabled", enabled)
+            if (arg!! != enabled) {
+                settings.setBool("enabled", arg)
                 
-                return@registerCommand CommandResult(null, null, false)
+                if (arg) {
+                    patcher.patch(
+                        "com.discord.stores.StoreUserTyping",
+                        "setUserTyping",
+                        arrayOf<Class<*>>(Long::class.java),
+                        MethodReplacement.DO_NOTHING
+                    )
+                    logger.info(Utils.appActivity, "Enabled SilentTyping")
+                } else {
+                    unpatch.run()
+                    logger.info(Utils.appActivity, "Disabled SilentTyping")
+                }
+            } else {
+                logger.info(Utils.appActivity, "SilentTyping status was not changed!")
             }
-            unpatch.run(); logger.info(Utils.appActivity, "Disabled SilentTyping")
-            
-            settings.setBool("enabled", enabled)
             
             return@registerCommand CommandResult(null, null, false)
         }

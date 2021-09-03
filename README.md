@@ -18,49 +18,14 @@ Sets the tag text on webhook messages to "WEBHOOK" instead of "BOT"
 
 Allows you to set your nickname in a server via a command. It does not yet check if you have permission to do so (coming soon™️)
 
+### Dashless
+
+Replaces dashes in channel names with spaces, this will likely break on Discord updates so watch out (if it does it probably won't crash, but channels might be named something crazy)! 
+
 ## Build instructions
 
-Building these plugins requires you do either have the source of [buildtool](https://github.com/Aliucord/buildtool) or the [prebuilt binary](https://github.com/Aliucord/buildtool/releases/latest) as well as a `config.json` in the same folder.
+**1.** Clone this repository and change directory to the cloned repository.
 
-**1.** Create a setup like the one below.
+**2.** Build plugins, preferably by name using `./gradlew PluginName:make` or deploy immediately to a device connected via ADB with `./gradlew PluginName:deployWithAdb` where `PluginName` is the name of the plugin you'd like to build, e.g `SilentTyping`.
 
-**Example**
-
-```
-.
-├── repo (Aliucord/Aliucord - cloned)
-│
-├── aliucord-plugins (this repo - cloned)
-│
-├── buildsPlugins (output dir for buildtool)
-│
-├── buildtool (Aliucord/buildtool - cloned) OR buildtool (prebuilt binary)
-│
-└── config.json (you'll configure this next)
-```
-
-**2.** Configure `config.json` for `buildtool` so that it suits your working environment.
-
-**Example** _remember, if you're on Windows you need to use `\\` for the `androidSDK` key, e.g `C:\\Users\\username`_
-
-```json
-{
-  "aliucord": "./repo",
-  "plugins": "./aliucord-plugins",
-  "androidSDK": "Path/To/Android/Sdk",
-  "outputs": "./builds",
-  "outputsPlugins": "./buildsPlugins"
-}
-```
-
-**2.** Run `buildtool`...
-
-```
-.\buildtool -p <PLUGIN_NAME>
-```
-e.g
-```
-.\buildtool -p SilentTyping
-```
-
-**3.** Find the built plugin(s) in `./buildsPlugins`.
+> *Psst! The `make` task will output the build to the `PluginName/build` directory!*

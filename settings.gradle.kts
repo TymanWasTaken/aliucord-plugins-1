@@ -3,7 +3,8 @@ rootProject.name = "plugins"
 listOf(
     "SilentTyping",
     "WebhookTag",
-    "NicknameCommand"
+    "NicknameCommand",
+    "Dashless"
 ).forEach { plugin ->
     include(":$plugin")
     project(":$plugin").projectDir = File(plugin)
