@@ -1,6 +1,7 @@
 rootProject.name = "plugins"
 
 listOf(
+    "WhichMessage",
     "SilentTyping",
     "WebhookTag",
     "NicknameCommand",
