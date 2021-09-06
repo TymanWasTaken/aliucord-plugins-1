@@ -2,7 +2,6 @@ package com.aliucord.plugins.whichmessage
 
 import android.content.Context
 import android.graphics.Color
-import android.text.SpannableStringBuilder
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
@@ -19,6 +18,7 @@ import com.discord.utilities.color.ColorCompat
 import com.discord.utilities.textprocessing.MessageParseState
 import com.discord.utilities.textprocessing.MessageRenderContext
 import com.discord.utilities.textprocessing.node.EditedMessageNode
+import com.facebook.drawee.span.DraweeSpanStringBuilder
 import com.lytefast.flexinput.R
 
 class ViewsBuilder(
@@ -32,7 +32,7 @@ class ViewsBuilder(
     private val guildId = StoreStream.getGuildSelected().selectedGuildId
     
     private val nodes = parser.parse(msg.content, MessageParseState.`access$getInitialState$cp`())
-    private val builder = SpannableStringBuilder()
+    private val builder = DraweeSpanStringBuilder()
     
     private fun getNameToDisplay(): String? {
         return guildStore.getMember(guildId, author.id)?.nick
