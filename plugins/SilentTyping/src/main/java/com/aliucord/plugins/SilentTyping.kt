@@ -9,18 +9,17 @@ import com.aliucord.entities.CommandContext
 import com.aliucord.entities.Plugin
 import com.discord.api.commands.ApplicationCommandType
 import com.discord.models.commands.ApplicationCommandOption
+import com.discord.stores.StoreUserTyping
 import top.canyie.pine.callback.MethodReplacement
 
 @AliucordPlugin
 class SilentTyping : Plugin() {
     private val logger = Logger("SilentTyping")
-    
+
     override fun start(context: Context?) {
         val enabled = settings.getBool("enabled", true)
         val unpatch: Runnable = patcher.patch(
-            "com.discord.stores.StoreUserTyping",
-            "setUserTyping",
-            arrayOf<Class<*>>(Long::class.java),
+            StoreUserTyping::class.java.getDeclaredMethod("setUserTyping", Long::class.java),
             MethodReplacement.DO_NOTHING
         )
         val opt = ApplicationCommandOption(
@@ -33,22 +32,23 @@ class SilentTyping : Plugin() {
             null,
             null
         )
-        
+
         commands.registerCommand(
             "silenttyping",
             "Toggle silent typing on or off",
             listOf(opt)
         ) { ctx: CommandContext ->
             val arg = ctx.getBool("enabled")
-            
+
             if (arg!! != enabled) {
                 settings.setBool("enabled", arg)
-                
+
                 if (arg) {
                     patcher.patch(
-                        "com.discord.stores.StoreUserTyping",
-                        "setUserTyping",
-                        arrayOf<Class<*>>(Long::class.java),
+                        StoreUserTyping::class.java.getDeclaredMethod(
+                            "setUserTyping",
+                            Long::class.java
+                        ),
                         MethodReplacement.DO_NOTHING
                     )
                     logger.info(Utils.appActivity, "Enabled SilentTyping")
@@ -59,13 +59,13 @@ class SilentTyping : Plugin() {
             } else {
                 logger.info(Utils.appActivity, "SilentTyping status was not changed!")
             }
-            
+
             return@registerCommand CommandResult(null, null, false)
         }
-        
+
         if (!settings.getBool("enabled", true)) unpatch.run()
     }
-    
+
     override fun stop(context: Context?) {
         patcher.unpatchAll(); commands.unregisterAll()
     }

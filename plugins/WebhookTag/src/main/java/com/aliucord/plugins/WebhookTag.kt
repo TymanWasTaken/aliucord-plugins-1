@@ -16,7 +16,7 @@ import top.canyie.pine.Pine.CallFrame
 @AliucordPlugin
 class WebhookTag : Plugin() {
     private val logger = Logger("WebhookTag")
-    
+
     @SuppressLint("SetTextI18n")
     override fun start(context: Context?) {
         patcher.patch(
@@ -27,14 +27,14 @@ class WebhookTag : Plugin() {
                 val msg = callFrame.args[0] as Message
                 val author = msg.author as User
                 val coreUser = CoreUser(author)
-                
+
                 val tag = callFrame.thisObject.javaClass
                     .getDeclaredField("itemTag")
                     .let {
                         it.isAccessible = true
                         it.get(callFrame.thisObject) as TextView?
                     }
-                
+
                 try {
                     if (msg.webhookId != null && coreUser.discriminator == 0 && tag != null) tag.text =
                         "WEBHOOK"
@@ -43,9 +43,9 @@ class WebhookTag : Plugin() {
                 }
             })
     }
-    
+
     override fun stop(context: Context?) {
         patcher.unpatchAll()
     }
-    
+
 }

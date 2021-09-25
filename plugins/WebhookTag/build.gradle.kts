@@ -2,8 +2,8 @@ version = "1.1.1"
 description = "Replaces the \"BOT\" text with \"WEBHOOK\" on webhooks."
 
 aliucord {
-  changelog.set(
-    """
+    changelog.set(
+        """
         Improved {improved marginTop}
         ======================
         
@@ -15,5 +15,5 @@ aliucord {
         
         * Re-add null-check because I didn't quite know how null-checking worked with Kotlin in this situation
     """.trimIndent()
-  )
+    )
 }
