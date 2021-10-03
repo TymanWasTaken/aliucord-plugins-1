@@ -12,8 +12,10 @@ class Dashless : Plugin() {
         patcher.patch(
             Channel::class.java.getDeclaredMethod("m"),
             PinePatchFn {
+                it.result ?: return@PinePatchFn
                 it.result = it.result.toString().replace("-", " ")
-            })
+            }
+        )
     }
 
     override fun stop(context: Context?) = patcher.unpatchAll()
